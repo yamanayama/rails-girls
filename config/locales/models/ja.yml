@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      idea: 投稿
+    attributes:
+      idea:
+        name: タイトル
+        description: 投稿内容の説明
+        picture: ねこ画像

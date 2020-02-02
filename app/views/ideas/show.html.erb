@@ -1,26 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>猫画像</strong>
   <%= @idea.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>投稿内容の説明</strong>
   <%= @idea.description %>
 </p>
 
 <p>
-  <strong>Picture:</strong>
+  <strong>ねこ画像</strong>
   <%= image_tag(@idea.picture_url, width: 600) if @idea.picture.present? %>
 </p>
-
-<ul>
-  <li><%= @idea.name %></li>
-  <li><%= @idea.description %></li>
-</ul>
 
 
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>
-<%= link_to 'Destroy', @idea, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Delete', @idea, method: :delete, data: { confirm: 'Are you sure?' } %>
