@@ -2,19 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .imgblock{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  max-width: 980px;
+  // display: flex;
+  // justify-content: space-between;
+  // flex-wrap: wrap;
+  //   align-items: flex-start;
+  max-width: 1280px;
   list-style-type: none;
-  align-items: flex-start;
 
   > li {
-    max-width: 300px;
+    width: 30%;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
+    margin: .5em .5em;
 
     > a {
       display: block;
+
+      &:hover{
+        opacity: 0.6;
+        text-decoration: none;
+      }
 
       > img {
         width: 100%;
@@ -24,7 +30,8 @@
 
   p {
     background: #fff;
-    padding: .5em;
-    font-size: 1rem;
+    padding: 1em .5em .5em;
+    font-size: 1.4rem;
+    display: block;
   }
 }

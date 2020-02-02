@@ -15,3 +15,17 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+// import MagicGrid from "magic-grid"
+// let magicGrid = new magicGrid({
+//   container: '#container',
+//   items: 20,
+//   animate: true,
+// });
+
+
+// magicGrid.listen();
+var $grid = jQuery('.grid').imagesLoaded(function () {
+  $grid.masonry({
+    itemSelector: '.grid-item'
+  });
+});
