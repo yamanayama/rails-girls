@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
 
 
 
@@ -46,13 +47,25 @@
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script>
-console.log('aa');
-var $grid = jQuery('.grid').imagesLoaded(function () {
-  $grid.masonry({
-    itemSelector: '.grid-item'
-  });
-});
-</script>
+    <script>
+      console.log('aa');
+      var $grid = jQuery('.grid').imagesLoaded(function () {
+        $grid.masonry({
+          itemSelector: '.grid-item'
+        });
+      });
+
+      $(window).on('scroll',function(){
+        scrollHeight = $(document).height();
+        scrollPosition = $(window).height() + $(window).scrollTop();
+        if ( (scrollHeight - scrollPosition) / scrollHeight <= 0.05 ){
+          $('.jscroll').jscroll({
+            contentSelector: 'imgblock',
+            nextSelector: 'span.next a'
+          });
+        }
+
+      })
+    </script>
   </body>
 </html>

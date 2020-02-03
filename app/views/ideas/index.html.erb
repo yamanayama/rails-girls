@@ -6,7 +6,7 @@
 
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-  <ul class="imgblock grid" id="container">
+  <ul class="imgblock grid jscroll" id="container">
     <% @ideas.each do |idea| %>
       <%#  MEMO:画像がなかったら下記をスキップする #%>
       <% next unless idea.picture.present? %>
@@ -17,4 +17,5 @@
         <% end %>
       </li>
     <% end %>
+    <%= paginate @ideas %>
   </ul>

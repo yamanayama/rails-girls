@@ -5,6 +5,8 @@ class IdeasController < ApplicationController
   # GET /ideas.json
   def index
     @ideas = Idea.all
+    # 一画面に10個の要素を表示
+    @ideas = Idea.page(params[:page]).per(10)
   end
 
   # GET /ideas/1
