@@ -1,0 +1,41 @@
+FROM node:12.14.1-alpine3.11 as node
+FROM ruby:2.6.5-alpine3.11
+
+ENV BUILD_PACKAGES="curl-dev ruby-dev build-base" \
+    DEV_PACKAGES="zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev sqlite-dev postgresql-dev" \
+    RUBY_PACKAGES="ruby-json yaml"
+
+COPY --from=node /opt/yarn-* /opt/yarn
+COPY --from=node /usr/local/bin/node /usr/local/bin/
+
+RUN ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn \
+    && ln -s /opt/yarn/bin/yarnpkg /usr/local/bin/yarnpkg
+
+# Update and install base packages and nokogiri gem that requires a
+# native compilation
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache --update\
+    $BUILD_PACKAGES \
+    $DEV_PACKAGES \
+    $RUBY_PACKAGES
+
+# Copy the app into the working directory. This assumes your Gemfile
+# is in the root directory and includes your version of Rails that you
+# want to run.
+WORKDIR /var/www
+
+COPY Gemfile .
+COPY Gemfile.lock .
+COPY package.json .
+COPY yarn.lock .
+
+
+RUN gem install bundler
+RUN bundle config build.nokogiri --use-system-libraries && \
+    bundle install --jobs=4 && \
+    yarn install
+
+EXPOSE 3000
+
+CMD ["bundle", "exec", "rails", "s", "-b", "0.0.0.0"]
